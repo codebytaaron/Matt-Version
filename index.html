@@ -7,171 +7,719 @@
   <meta name="description" content="Frame & Save is a modern custom framing company in Connecticut offering high-quality, affordable framing for art, photos, and memorabilia." />
   <style>
     :root {
-      --bg: #0f172a;
+      color-scheme: dark;
+      --bg: #0b1120;
+      --surface: #0f172a;
       --card: #111827;
       --text: #e5e7eb;
-      --muted: #9ca3af;
+      --muted: #94a3b8;
       --accent: #38bdf8;
+      --accent-strong: #0ea5e9;
+      --border: #1f2937;
+      --success: #22c55e;
+      --shadow: 0 20px 50px rgba(2, 6, 23, 0.45);
+      --radius-lg: 20px;
+      --radius-md: 14px;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, sans-serif;
-      background: linear-gradient(180deg, #020617, #0f172a);
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0f172a, #020617 55%);
       color: var(--text);
       line-height: 1.6;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     header {
-      padding: 1.5rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(2, 6, 23, 0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
       display: flex;
+      align-items: center;
       justify-content: space-between;
+      padding: 1.2rem 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      font-size: 1.2rem;
+    }
+
+    .brand span {
+      display: inline-flex;
+      width: 36px;
+      height: 36px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+      color: #020617;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus {
+      color: var(--text);
+    }
+
+    .primary-btn {
+      background: var(--accent);
+      color: #020617;
+      border: none;
+      padding: 0.8rem 1.4rem;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 12px 25px rgba(14, 165, 233, 0.3);
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 35px rgba(14, 165, 233, 0.35);
+    }
+
+    .ghost-btn {
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      background: transparent;
+      cursor: pointer;
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+      display: grid;
+      gap: 4rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
       align-items: center;
     }
 
-    header h1 {
-      font-size: 1.4rem;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    nav a {
-      color: var(--muted);
-      margin-left: 1.5rem;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    nav a:hover { color: var(--text); }
-
-    .hero {
-      padding: 5rem 2rem;
-      max-width: 1100px;
-      margin: auto;
-      text-align: center;
-    }
-
-    .hero h2 {
-      font-size: 3rem;
+    .hero-text h1 {
+      font-size: clamp(2.6rem, 5vw, 3.8rem);
       font-weight: 800;
       margin-bottom: 1rem;
     }
 
-    .hero p {
-      font-size: 1.15rem;
+    .hero-text p {
       color: var(--muted);
-      max-width: 700px;
-      margin: auto;
+      font-size: 1.1rem;
+      margin-bottom: 1.5rem;
     }
 
-    .hero button {
-      margin-top: 2rem;
-      padding: 0.9rem 1.6rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 8px;
-      background: var(--accent);
-      color: #020617;
-      font-weight: 600;
-      cursor: pointer;
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 2rem;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 1rem;
+    }
+
+    .hero-card h2 {
+      font-size: 1.4rem;
+    }
+
+    .hero-card ul {
+      list-style: none;
+      display: grid;
+      gap: 0.75rem;
+      color: var(--muted);
+    }
+
+    .hero-card li::before {
+      content: "✓";
+      color: var(--success);
+      margin-right: 0.6rem;
     }
 
     section {
-      padding: 4rem 2rem;
-      max-width: 1100px;
-      margin: auto;
+      display: grid;
+      gap: 1.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(1.8rem, 3vw, 2.4rem);
     }
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.5rem;
     }
 
     .card {
       background: var(--card);
-      padding: 2rem;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      box-shadow: var(--shadow);
+      display: grid;
+      gap: 0.75rem;
     }
 
-    .card h3 {
-      margin-bottom: 0.5rem;
-    }
-
-    .card p {
+    .card p,
+    .card li {
       color: var(--muted);
       font-size: 0.95rem;
     }
 
-    .cta {
-      text-align: center;
-      background: radial-gradient(circle at top, #1e3a8a, #020617);
-      border-radius: 20px;
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.15);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.85rem;
     }
 
-    footer {
+    .steps {
+      counter-reset: steps;
+      display: grid;
+      gap: 1rem;
+    }
+
+    .steps li {
+      list-style: none;
+      background: var(--surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 1rem 1.2rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .steps li::before {
+      counter-increment: steps;
+      content: counter(steps);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(34, 211, 238, 0.15);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem 0.9rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: #0b1220;
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+      outline: 2px solid rgba(56, 189, 248, 0.6);
+      outline-offset: 2px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+
+    .estimate-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(2, 6, 23, 0.95));
+      border-radius: var(--radius-lg);
       padding: 2rem;
-      text-align: center;
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 1.5rem;
+      box-shadow: var(--shadow);
+    }
+
+    .estimate-result {
+      display: grid;
+      gap: 0.4rem;
+      padding: 1.2rem;
+      border-radius: var(--radius-md);
+      background: rgba(34, 197, 94, 0.12);
+      border: 1px solid rgba(34, 197, 94, 0.3);
+    }
+
+    .estimate-result strong {
+      font-size: 1.6rem;
+    }
+
+    .estimate-meta {
+      display: grid;
+      gap: 0.3rem;
       color: var(--muted);
       font-size: 0.9rem;
     }
 
-    @media (max-width: 640px) {
-      .hero h2 { font-size: 2.2rem; }
+    .contact-card {
+      display: grid;
+      gap: 1rem;
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      border: 1px solid var(--border);
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .contact-row span {
+      display: block;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .testimonial {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .testimonial h4 {
+      font-size: 1rem;
+    }
+
+    .cta-banner {
+      background: radial-gradient(circle at top, rgba(14, 165, 233, 0.4), transparent 60%), #0b1120;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2.5rem;
+      text-align: center;
+      display: grid;
+      gap: 1rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      background: #0b1220;
+      border: 1px solid var(--border);
+      padding: 1rem 1.5rem;
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      display: none;
+    }
+
+    .toast.show {
+      display: block;
+    }
+
+    @media (max-width: 720px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        gap: 1rem;
+      }
+
+      .toast {
+        right: 1rem;
+        left: 1rem;
+      }
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>Frame & Save</h1>
-    <nav>
-      <a href="#services">Services</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
+    <div class="nav">
+      <div class="brand">
+        <span>F</span>
+        Frame &amp; Save
+      </div>
+      <nav class="nav-links">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#estimate">Estimate</a>
+        <a href="#testimonials">Reviews</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="primary-btn" href="#estimate">Get a free estimate</a>
+    </div>
   </header>
 
-  <div class="hero">
-    <h2>Modern Custom Framing<br />Without the Premium Price</h2>
-    <p>Frame & Save is a Connecticut-based custom framing company offering clean design, quality craftsmanship, and fast turnaround times for art, photos, posters, and memorabilia.</p>
-    <button>Get a Free Quote</button>
-  </div>
-
-  <section id="services">
-    <h2>What We Frame</h2>
-    <div class="grid">
-      <div class="card">
-        <h3>Artwork & Prints</h3>
-        <p>Protect and showcase original art with clean, modern frames.</p>
+  <main>
+    <section class="hero" id="top">
+      <div class="hero-text">
+        <span class="badge">Connecticut-based • 7-day turnaround</span>
+        <h1>Custom framing that feels boutique, priced like it’s local.</h1>
+        <p>From heirloom artwork to concert posters, we design frames that protect, elevate, and ship fast. Transparent pricing, designer guidance, and flawless finishes—no premium markup.</p>
+        <div class="hero-actions">
+          <a class="primary-btn" href="#estimate">Start your quote</a>
+          <a class="ghost-btn" href="#contact">Talk to a framer</a>
+        </div>
       </div>
-      <div class="card">
-        <h3>Photos & Posters</h3>
-        <p>High-quality framing that elevates everyday memories.</p>
+      <div class="hero-card">
+        <h2>Why Frame &amp; Save</h2>
+        <ul>
+          <li>Design consults included with every order.</li>
+          <li>Premium wood and metal frames with UV glass.</li>
+          <li>Pickup &amp; delivery across greater Hartford.</li>
+          <li>Ready in as little as 7 days.</li>
+        </ul>
       </div>
-      <div class="card">
-        <h3>Memorabilia</h3>
-        <p>Sports jerseys, awards, and keepsakes done right.</p>
+    </section>
+
+    <section id="services">
+      <div class="section-header">
+        <h2>What we frame</h2>
+        <p class="badge">Tailored to every piece</p>
       </div>
-    </div>
-  </section>
+      <div class="grid">
+        <div class="card">
+          <h3>Artwork &amp; Prints</h3>
+          <p>Museum-grade matting, conservation materials, and floating mounts for originals and limited editions.</p>
+        </div>
+        <div class="card">
+          <h3>Photos &amp; Posters</h3>
+          <p>Show off everyday memories with color-matched frames and anti-glare glazing.</p>
+        </div>
+        <div class="card">
+          <h3>Memorabilia</h3>
+          <p>Shadow boxes for jerseys, medals, and keepsakes designed to preserve depth and texture.</p>
+        </div>
+        <div class="card">
+          <h3>Corporate &amp; Hospitality</h3>
+          <p>Bulk framing for offices, restaurants, and staging projects with volume pricing and white-glove delivery.</p>
+        </div>
+      </div>
+    </section>
 
-  <section id="about">
-    <h2>About Frame & Save</h2>
-    <p style="color: var(--muted); max-width: 800px;">
-      Frame & Save was created to make professional custom framing more accessible. We combine modern design, durable materials, and fair pricing to help customers across Connecticut preserve what matters most.
-    </p>
-  </section>
+    <section id="process">
+      <div class="section-header">
+        <h2>How it works</h2>
+        <p class="badge">Simple &amp; transparent</p>
+      </div>
+      <ol class="steps">
+        <li>
+          <div>
+            <h3>Share your piece</h3>
+            <p>Upload dimensions and a quick photo, or bring it in for a consult.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>We design together</h3>
+            <p>Our framers suggest styles, mats, and glazing that fit your space and budget.</p>
+          </div>
+        </li>
+        <li>
+          <div>
+            <h3>Craft &amp; deliver</h3>
+            <p>Your frame is built locally and ready for pickup or delivery in 7–10 days.</p>
+          </div>
+        </li>
+      </ol>
+    </section>
 
-  <section id="contact" class="cta">
-    <h2>Ready to Frame Something?</h2>
-    <p style="color: var(--muted);">Contact us today for a fast, free quote.</p>
-    <button style="margin-top:1.5rem;">Contact Frame & Save</button>
-  </section>
+    <section id="estimate">
+      <div class="section-header">
+        <h2>Instant estimate</h2>
+        <p class="badge">Know the price before you commit</p>
+      </div>
+      <div class="estimate-card">
+        <form id="estimate-form">
+          <div class="form-grid">
+            <div>
+              <label for="width">Artwork width (in)</label>
+              <input id="width" name="width" type="number" min="4" max="60" value="16" required />
+            </div>
+            <div>
+              <label for="height">Artwork height (in)</label>
+              <input id="height" name="height" type="number" min="4" max="60" value="20" required />
+            </div>
+            <div>
+              <label for="frame">Frame style</label>
+              <select id="frame" name="frame" required>
+                <option value="classic">Classic wood</option>
+                <option value="modern">Modern matte</option>
+                <option value="gallery">Gallery float</option>
+              </select>
+            </div>
+            <div>
+              <label for="glass">Glazing</label>
+              <select id="glass" name="glass" required>
+                <option value="standard">Standard glass</option>
+                <option value="uv">UV protect</option>
+                <option value="anti">Anti-glare</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="notes">Special notes</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Tell us about matting, spacing, or any unique details."></textarea>
+          </div>
+          <div class="estimate-result" aria-live="polite">
+            <span>Estimated total</span>
+            <strong id="estimate-total">$165</strong>
+            <div class="estimate-meta" id="estimate-breakdown"></div>
+          </div>
+          <button class="primary-btn" type="submit">Request this quote</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="testimonials">
+      <div class="section-header">
+        <h2>Clients love the results</h2>
+        <p class="badge">★★★★★ 4.9 average rating</p>
+      </div>
+      <div class="grid">
+        <div class="testimonial">
+          <p>“I had a vintage concert poster framed and it looks like a gallery piece. The price was half what I expected.”</p>
+          <h4>— Megan R., West Hartford</h4>
+        </div>
+        <div class="testimonial">
+          <p>“Quick turnaround and the team helped me choose the right matting. I’ll be back with more artwork.”</p>
+          <h4>— Daniel S., New Haven</h4>
+        </div>
+        <div class="testimonial">
+          <p>“We framed 20 pieces for our office lobby and the delivery/setup was flawless.”</p>
+          <h4>— Carla M., Hartford</h4>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="section-header">
+        <h2>Let’s frame something</h2>
+        <p class="badge">Free consults 7 days a week</p>
+      </div>
+      <div class="contact-card">
+        <div class="contact-row">
+          <div>
+            <span>Studio</span>
+            214 Pratt Street, Hartford, CT
+          </div>
+          <div>
+            <span>Phone</span>
+            (860) 555-0198
+          </div>
+          <div>
+            <span>Email</span>
+            hello@frameandsavect.com
+          </div>
+          <div>
+            <span>Hours</span>
+            Mon–Sat 10am–7pm, Sun 11am–5pm
+          </div>
+        </div>
+        <form id="contact-form">
+          <div class="form-grid">
+            <div>
+              <label for="name">Full name</label>
+              <input id="name" name="name" type="text" placeholder="Alex Carter" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="alex@email.com" required />
+            </div>
+          </div>
+          <div class="form-grid">
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="(860) 555-0123" />
+            </div>
+            <div>
+              <label for="timeline">Timeline</label>
+              <select id="timeline" name="timeline">
+                <option value="next-week">Within 1 week</option>
+                <option value="two-weeks">Within 2 weeks</option>
+                <option value="month">This month</option>
+                <option value="flexible">Flexible</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label for="message">Tell us about your piece</label>
+            <textarea id="message" name="message" rows="4" placeholder="Size, materials, and any inspiration you have."></textarea>
+          </div>
+          <button class="primary-btn" type="submit">Send message</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="cta-banner">
+      <h2>Need help choosing a frame?</h2>
+      <p>Book a complimentary 15-minute consult with one of our designers.</p>
+      <div class="hero-actions" style="justify-content:center;">
+        <button class="primary-btn" id="book-call" type="button">Schedule a consult</button>
+        <a class="ghost-btn" href="#estimate">Get estimate</a>
+      </div>
+    </section>
+  </main>
 
   <footer>
-    © 2026 Frame & Save · Connecticut
+    © 2026 Frame &amp; Save · Connecticut · Crafted with care
   </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const estimateForm = document.getElementById("estimate-form");
+    const estimateTotal = document.getElementById("estimate-total");
+    const estimateBreakdown = document.getElementById("estimate-breakdown");
+    const toast = document.getElementById("toast");
+
+    const pricing = {
+      base: 85,
+      frame: { classic: 1.0, modern: 1.15, gallery: 1.3 },
+      glass: { standard: 1.0, uv: 1.2, anti: 1.15 }
+    };
+
+    const currency = (value) => `$${value.toFixed(0)}`;
+
+    const updateEstimate = () => {
+      const width = Number(estimateForm.width.value);
+      const height = Number(estimateForm.height.value);
+      const sizeFactor = Math.max(1, (width * height) / 320);
+      const frameFactor = pricing.frame[estimateForm.frame.value];
+      const glassFactor = pricing.glass[estimateForm.glass.value];
+
+      const subtotal = pricing.base * sizeFactor;
+      const total = subtotal * frameFactor * glassFactor;
+
+      estimateTotal.textContent = currency(total);
+      estimateBreakdown.innerHTML = `
+        <span>${width}x${height} in • ${estimateForm.frame.options[estimateForm.frame.selectedIndex].text}</span>
+        <span>${estimateForm.glass.options[estimateForm.glass.selectedIndex].text}</span>
+        <span>Includes mounting + backing</span>
+      `;
+    };
+
+    estimateForm.addEventListener("input", updateEstimate);
+
+    estimateForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      showToast("Thanks! Your quote request is in. We’ll email you within 1 business day.");
+      estimateForm.reset();
+      estimateForm.width.value = 16;
+      estimateForm.height.value = 20;
+      updateEstimate();
+    });
+
+    const contactForm = document.getElementById("contact-form");
+    contactForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      showToast("Message sent! We’ll reach out shortly to confirm your consult.");
+      contactForm.reset();
+    });
+
+    document.getElementById("book-call").addEventListener("click", () => {
+      showToast("Consult booked! Check your email for a calendar link.");
+    });
+
+    const showToast = (message) => {
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 4000);
+    };
+
+    updateEstimate();
+  </script>
 </body>
 </html>
